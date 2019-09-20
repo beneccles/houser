@@ -5,7 +5,8 @@ const initialState = {
     address: "",
     city: "",
     state: "",
-    zipcode: ""
+    zipcode: "",
+    houses: []
 }
 
 export const HANDLE_NAME = 'HANDLE_NAME'

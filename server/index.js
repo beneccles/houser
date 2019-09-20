@@ -10,6 +10,10 @@ const app = express()
 
 app.use(express.json())
 
+app.get('/api/houses', ctrl.getHouses)
+app.post('/api/house', ctrl.addHouse)
+app.delete('/api/house/:id', ctrl.deleteHouse)
+
 // Lets get the database connected!
 massive(CONNECTION_STRING).then(db => {
     app.set('db', db)

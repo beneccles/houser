@@ -16,22 +16,12 @@ class Wizard extends Component {
         })
     }
 
-    // handleName(name) {
-    //     this.setState({name})
-    //     console.log(this.state.name)
-    // }
-
     handleAddress = (e) => {
         store.dispatch({
             type: HANDLE_ADDRESS,
             payload: e.target.value
         })
     }
-
-    // handleAddress(address) {
-    //     this.setState({address})
-    //     console.log(this.state.address)
-    // }
 
     handleCity = (e) => {
         store.dispatch({
@@ -53,16 +43,6 @@ class Wizard extends Component {
             payload: e.target.value
         })
     }
-
-    // handleState(state) {
-    //     this.setState({state})
-    //     console.log(this.state.state)
-    // }
-
-    // handleZip(zip) {
-    //     this.setState({zip})
-    //     console.log(this.state.zipcode)
-    // }
 
     render() {
         return (
