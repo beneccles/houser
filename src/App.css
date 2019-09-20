@@ -72,7 +72,7 @@ table {
 /*^Header Section^*/
 
 /* Main Body */
-body {
+.body {
   display: flex;
 	flex-direction: column;
 	flex-wrap: wrap;
@@ -121,5 +121,24 @@ body {
   padding: 10px;
 }
 /*^Dashboard^*/
+
+/* Wizard */
+ .wizardBody {
+   background-color: #E5F4EC;
+   width: 50vw;
+   height: 100vh;
+   padding: 10px;
+ }
+
+ .wizardHeader {
+  display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	align-items: center;
+  align-content: stretch;
+ }
+
+/*^Wizard^*/
 
 /*^Main Body^*/

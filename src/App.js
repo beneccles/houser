@@ -9,10 +9,13 @@ function App() {
   return (
     <div className="App">
       <Header />
-      <body>
+      {/* React doesn't like it when I used the body html tag here, so I opted for
+      a div instead. The className of "body" is there to indicate this is the main
+      body of the app, even though it doesn't use the body tag. */}
+      <div className="body">
       {/* Lets bring in those sweet, sweet routes. */}
       { routes }
-      </body>
+      </div>
     </div>
   );
 }
