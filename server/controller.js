@@ -1,7 +1,9 @@
 module.exports = {
     getHouses: (req, res) => {
         const db = req.app.get('db')
-        db.get_houses().then(houses => res.status(200).send(houses)).catch(err => {
+        db.get_houses().then(houses => {
+            // Confirmed houses output into here as an array of objects
+            return res.status(200).send(houses)}).catch(err => {
             console.log(err)
             res.status(500).send({ errorMessage: 'Something went wrong with our database! Our Engineers have been notified.' })
         })
@@ -22,6 +24,13 @@ module.exports = {
     },
     deleteHouse: (req, res) => {
         const db = req.app.get('db')
-        res.sendStatus(200)
+        const { id } = req.params
+
+        db.delete_house([id]).then(result => {
+            res.status(200).send(result)
+        }).catch(err => {
+            console.log(err)
+            res.status(500).send({errorMessage: 'Something went wrong when we tried to delete this home! Our engineers have been notified.'})
+        })
     }
 }

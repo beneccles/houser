@@ -12,22 +12,43 @@ class Dashboard extends Component {
         }
     }
 
-    getHouses() {
-
+    componentDidMount() {
+        this.getHouses()
     }
 
-    render() {
-        const {houses} = this.state
-        const houseRender = houses.map((element) => {
-            return <House />
+     getHouses() {
+         axios.get('/api/houses').then((houses) => {
+            // Confired data destructure off of houses,
+            // the array of houses shows up in console.log
+            const {data} = houses;
+            this.setState({data})
         })
+    }
+
+    
+    renderHouses() {
+        const {houses} = this.state
+        let houseRender = houses.map((element, index) => {
+            const {name, address, city, state,
+            zip, img, mortgage, rent} = element
+
+            return <div key={index}><House /></div>
+        })
+
+        return houseRender;
+    }
+  
+    render() {
+       
         return (
             <div className="dashboard">
                 <div className="dashHeader">
                     <h1 id="dashboardTitle">Dashboard</h1>
                     <Link to="/wizard"><button id="newPropertyButton">Add New Property</button></Link>
                 </div>
-                {houseRender}
+                <div>
+                {this.renderHouses()}
+                </div>
             </div>
         )
     }
