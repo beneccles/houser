@@ -1,5 +1,9 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
+import axios from 'axios'
+import One from '../Steps/One'
+import Two from '../Steps/Two'
+import Three from '../Steps/Three'
+import { Link , Route, Switch} from 'react-router-dom'
 import store, 
 {HANDLE_NAME, HANDLE_ADDRESS, 
  HANDLE_CITY, HANDLE_STATE, HANDLE_ZIP} from '../../store';
@@ -7,42 +11,31 @@ import store,
 class Wizard extends Component {
     constructor() {
         super()
+        const home = store.getState();
+        this.state ={
+            house: home
+        }
     }
 
-    handleName = (e) => {
-        store.dispatch({
-            type: HANDLE_NAME,
-            payload: e.target.value
+    componentDidMount(){
+        //Subcribe to store changes
+        store.subscribe(() => {
+            const reduxState = store.getState()
+            this.setState({
+                house: reduxState
+            })
+        })
+    }
+    
+
+   
+
+    submitToDB() {
+        axios.post('/api/house', this.state.house).then(() => {
+            console.log('House sent!')
         })
     }
 
-    handleAddress = (e) => {
-        store.dispatch({
-            type: HANDLE_ADDRESS,
-            payload: e.target.value
-        })
-    }
-
-    handleCity = (e) => {
-        store.dispatch({
-            type: HANDLE_CITY,
-            payload: e.target.value
-        })
-    }
-
-    handleState = (e) => {
-        store.dispatch({
-            type: HANDLE_STATE,
-            payload: e.target.value
-        })
-    }
-
-    handleZip = (e) => {
-        store.dispatch({
-            type: HANDLE_ZIP,
-            payload: e.target.value
-        })
-    }
 
     render() {
         return (
@@ -51,11 +44,15 @@ class Wizard extends Component {
                     <h1>Add New Listing</h1>
                     <Link to="/"><button>Cancel</button></Link>
                 </div>
-                <input type="text" onChange={this.handleName} placeholder="name" />
-                <input type="text" onChange={this.handleAddress} placeholder="address" />
-                <input type="text" onChange={this.handleCity} placeholder="city" />
-                <input type="text" onChange={this.handleState} placeholder="state" />
-                <input type="text" onChange={this.handleZip} placeholder="zipcode" />
+                <div className="wizardRoutes">
+                <Switch>
+                    <Route exact path="/wizard/one" component={One} />
+                    <Route path="/wizard/two" component={Two} />
+                    <Route path="/wizard/three" component={Three} />
+                </Switch>
+                </div>
+               
+               
 
 
             </div>

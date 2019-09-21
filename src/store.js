@@ -6,7 +6,8 @@ const initialState = {
     city: "",
     state: "",
     zipcode: "",
-    houses: []
+    mortgage: "",
+    rent: ""
 }
 
 export const HANDLE_NAME = 'HANDLE_NAME'
@@ -14,8 +15,9 @@ export const HANDLE_ADDRESS = 'HANDLE_ADDRESS'
 export const HANDLE_CITY = 'HANDLE_CITY'
 export const HANDLE_STATE = 'HANDLE_STATE'
 export const HANDLE_ZIP = 'HANDLE_ZIP'
+export const HANDLE_IMG = 'HANDLE_IMG'
 
-export default function(state = initialState, action) {
+function reducer(state = initialState, action) {
     const { type, payload } = action
     switch(type) {
         case HANDLE_NAME:
@@ -28,8 +30,12 @@ export default function(state = initialState, action) {
             return {...state, state: payload}
         case HANDLE_ZIP:
             return {...state, zipcode: payload}
+        case HANDLE_IMG:
+            return {...state, img: payload}
         default:
             return state
         
     }
 }
+
+export default createStore(reducer)
