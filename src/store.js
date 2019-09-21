@@ -15,7 +15,7 @@ export const HANDLE_CITY = 'HANDLE_CITY'
 export const HANDLE_STATE = 'HANDLE_STATE'
 export const HANDLE_ZIP = 'HANDLE_ZIP'
 
-function reducer(state = initialState, action) {
+export default function(state = initialState, action) {
     const { type, payload } = action
     switch(type) {
         case HANDLE_NAME:
@@ -33,5 +33,3 @@ function reducer(state = initialState, action) {
         
     }
 }
-
-export default createStore(reducer)
