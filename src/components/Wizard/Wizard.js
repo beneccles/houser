@@ -3,7 +3,7 @@ import axios from 'axios'
 import One from '../Steps/One'
 import Two from '../Steps/Two'
 import Three from '../Steps/Three'
-import { Link , Route, Switch} from 'react-router-dom'
+import { Link , Route, Switch, withRouter} from 'react-router-dom'
 import store, 
 {HANDLE_NAME, HANDLE_ADDRESS, 
  HANDLE_CITY, HANDLE_STATE, HANDLE_ZIP} from '../../store';
@@ -30,11 +30,7 @@ class Wizard extends Component {
 
    
 
-    submitToDB() {
-        axios.post('/api/house', this.state.house).then(() => {
-            console.log('House sent!')
-        })
-    }
+
 
 
     render() {
@@ -50,6 +46,7 @@ class Wizard extends Component {
                     <Route path="/wizard/two" component={Two} />
                     <Route path="/wizard/three" component={Three} />
                 </Switch>
+                
                 </div>
                
                
@@ -60,4 +57,4 @@ class Wizard extends Component {
     }
 }
 
-export default Wizard
+export default withRouter(Wizard)

@@ -6,6 +6,7 @@ class Three extends Component {
         super()
     }
 
+    // DONT FORGET TO CREATE THE ACTION CONSTANTS FOR THESE IN STORE!
     handleMortgage = (e) => {
         store.dispatch({
             type: HANDLE_MORTGAGE,
@@ -34,7 +35,8 @@ class Three extends Component {
                     </div>
                 </div>
                 <div className="stepThreeButtons">
-                    
+                <button onClick={() => {this.props.history.push('/wizard/two')}}>Back </button>
+                <button onClick={() => {this.props.history.push('/')}}>Complete</button>
                 </div>
             </div>
         )

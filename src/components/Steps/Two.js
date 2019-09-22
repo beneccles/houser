@@ -20,7 +20,8 @@ class Two extends Component {
                     <input type="text" onChange={this.handleImg} placeholder="name" />
                     </div>
                     <div className="naviSteps">
-                        
+                    <button onClick={() => {this.props.history.push('/wizard/one')}}>Back </button>
+                    <button onClick={() => {this.props.history.push('/wizard/three')}}>Next </button>
                     </div>
                 </div>
             )

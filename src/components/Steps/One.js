@@ -1,9 +1,34 @@
 import React, { Component } from 'react'
 import store, { HANDLE_NAME, HANDLE_ADDRESS, HANDLE_CITY, HANDLE_STATE, HANDLE_ZIP } from '../../store';
+import { Link, withRouter } from "react-router-dom";
 
 class One extends Component {
     constructor() {
         super()
+        const home = store.getState()
+        this.state ={
+            name: home.name,
+            address: home.address,
+            city: home.city,
+            state: home.state,
+            zip: home.zipcode
+        }
+    }
+
+    componentDidMount(){
+        
+        store.subscribe(() => {
+            const reduxState = store.getState()
+            this.setState({
+                name: reduxState.name,
+                address: reduxState.address,
+                city: reduxState.city,
+                state: reduxState.state,
+                zip: reduxState.zipcode
+            })
+
+        })
+
     }
 
     // Handle Name Change
@@ -46,21 +71,25 @@ class One extends Component {
         return (
             <div className="StepOne">
                 <div id="stepOneName">
-                    <input type="text" onChange={this.handleName} placeholder="name" />
+                    <input value={this.state.name} type="text" onChange={this.handleName} placeholder="name" />
                 </div>
                 <div id="stepOneAddress">
-                    <input type="text" onChange={this.handleAddress} placeholder="address" />
+                    <input value={this.state.address} type="text" onChange={this.handleAddress} placeholder="address" />
                 </div>
                 <div id="stepOneThree">
                     <div id="stepOneCity">
-                        <input type="text" onChange={this.handleCity} placeholder="city" />
+                        <input value={this.state.city} type="text" onChange={this.handleCity} placeholder="city" />
                     </div>
                     <div id="stepOneState">
-                        <input type="text" onChange={this.handleState} placeholder="state" />
+                        <input value={this.state.state} type="text" onChange={this.handleState} placeholder="state" />
                     </div>
                     <div id="stepOneZip">
-                        <input type="text" onChange={this.handleZip} placeholder="zipcode" />
+                        <input value={this.state.zip} type="text" onChange={this.handleZip} placeholder="zipcode" />
                     </div>
+                </div>
+                <div className="naviButtons">
+                <button onClick={() => {this.props.history.push('/wizard/two')}}>Next </button>
+                <button onClick={() => {this.props.history.push('/')}}>Cancel </button>
                 </div>
             </div>
         )

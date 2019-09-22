@@ -16,6 +16,8 @@ export const HANDLE_CITY = 'HANDLE_CITY'
 export const HANDLE_STATE = 'HANDLE_STATE'
 export const HANDLE_ZIP = 'HANDLE_ZIP'
 export const HANDLE_IMG = 'HANDLE_IMG'
+export const HANDLE_MORTGAGE = 'HANDLE_MORTGAGE'
+export const HANDLE_RENT = 'HANDLE_RENT'
 
 function reducer(state = initialState, action) {
     const { type, payload } = action
@@ -32,6 +34,10 @@ function reducer(state = initialState, action) {
             return {...state, zipcode: payload}
         case HANDLE_IMG:
             return {...state, img: payload}
+        case HANDLE_MORTGAGE:
+            return {...state, mortgage: payload}
+        case HANDLE_RENT:
+            return {...state, rent: payload}
         default:
             return state
         
