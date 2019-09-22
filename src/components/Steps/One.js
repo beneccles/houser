@@ -7,6 +7,8 @@ class One extends Component {
         super()
         const home = store.getState()
         this.state ={
+            // If we are coming back from a future step,
+            // initialize the input boxes with their original data.
             name: home.name,
             address: home.address,
             city: home.city,
@@ -16,8 +18,7 @@ class One extends Component {
     }
 
     componentDidMount(){
-        
-        store.subscribe(() => {
+        this.unsubscribe = store.subscribe(() => {
             const reduxState = store.getState()
             this.setState({
                 name: reduxState.name,
@@ -26,9 +27,11 @@ class One extends Component {
                 state: reduxState.state,
                 zip: reduxState.zipcode
             })
+        }).bind(this)
+    }
 
-        })
-
+    componentWillUnmount() {
+        this.unsubscribe();
     }
 
     // Handle Name Change
@@ -84,7 +87,7 @@ class One extends Component {
                         <input value={this.state.state} type="text" onChange={this.handleState} placeholder="state" />
                     </div>
                     <div id="stepOneZip">
-                        <input value={this.state.zip} type="text" onChange={this.handleZip} placeholder="zipcode" />
+                        <input value={this.state.zip} type="number" onChange={this.handleZip} placeholder="zipcode" />
                     </div>
                 </div>
                 <div className="naviButtons">

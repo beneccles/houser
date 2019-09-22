@@ -4,9 +4,7 @@ import One from '../Steps/One'
 import Two from '../Steps/Two'
 import Three from '../Steps/Three'
 import { Link , Route, Switch, withRouter} from 'react-router-dom'
-import store, 
-{HANDLE_NAME, HANDLE_ADDRESS, 
- HANDLE_CITY, HANDLE_STATE, HANDLE_ZIP} from '../../store';
+import store from '../../store';
 
 class Wizard extends Component {
     constructor() {
@@ -19,14 +17,17 @@ class Wizard extends Component {
 
     componentDidMount(){
         //Subcribe to store changes
-        store.subscribe(() => {
+        this.unsubscribe = store.subscribe(() => {
             const reduxState = store.getState()
             this.setState({
                 house: reduxState
             })
-        })
+        }).bind(this)
     }
     
+    componentWillUnmount() {
+        this.unsubscribe();
+    }
 
    
 
