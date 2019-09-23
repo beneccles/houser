@@ -13,14 +13,7 @@ const initialState = {
 
 // Trust me, I can handel this.
 export const HANDLE_STEP1 = 'HANDLE_STEP1'
-export const HANDLE_NAME = 'HANDLE_NAME'
-export const HANDLE_ADDRESS = 'HANDLE_ADDRESS'
-export const HANDLE_CITY = 'HANDLE_CITY'
-export const HANDLE_STATE = 'HANDLE_STATE'
-export const HANDLE_ZIP = 'HANDLE_ZIP'
-export const HANDLE_IMG = 'HANDLE_IMG'
-export const HANDLE_MORTGAGE = 'HANDLE_MORTGAGE'
-export const HANDLE_RENT = 'HANDLE_RENT'
+export const HANDLE_STEP3 = 'HANDLE_STEP3'
 export const CLEAR_STATE = 'CLEAR_STATE'
 export const HANDLE_IMAGE = 'HANDLE_IMAGE'
 
@@ -29,22 +22,10 @@ function reducer(state = initialState, action) {
     switch (type) {
         case HANDLE_STEP1:
             return {...state, ...payload}
-        case HANDLE_NAME:
-            return { ...state, name: payload }
-        case HANDLE_ADDRESS:
-            return { ...state, address: payload }
-        case HANDLE_CITY:
-            return { ...state, city: payload }
-        case HANDLE_STATE:
-            return { ...state, state: payload }
-        case HANDLE_ZIP:
-            return { ...state, zipcode: payload }
+        case HANDLE_STEP3:
+            return {...state, ...payload}
         case HANDLE_IMAGE:
             return { ...state, image: payload }
-        case HANDLE_MORTGAGE:
-            return { ...state, mortgage: payload }
-        case HANDLE_RENT:
-            return { ...state, rent: payload }
         case CLEAR_STATE:
             return {
                 name: "",

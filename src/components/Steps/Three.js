@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import store, { HANDLE_MORTGAGE, HANDLE_RENT, CLEAR_STATE } from '../../store'
+import store, { HANDLE_STEP3, CLEAR_STATE } from '../../store'
 import axios from 'axios'
 
 class Three extends Component {
@@ -33,6 +33,13 @@ class Three extends Component {
         })
     }
 
+    handleThree = () => {
+        store.dispatch({
+            type: HANDLE_STEP3,
+            payload: this.state
+        })
+    }
+
     submitToDB = () => {
         const reduxState = store.getState()
         const newHouse = {...reduxState, ...this.state}
@@ -56,7 +63,8 @@ class Three extends Component {
                     </div>
                 </div>
                 <div className="stepThreeButtons">
-                    <button onClick={() => { this.props.history.push('/wizard/two') }}>Back </button>
+                    <button onClick={() => { this.handleThree()
+                        this.props.history.push('/wizard/two') }}>Back </button>
                     <button onClick={this.submitToDB}>Complete</button>
                 </div>
             </div>

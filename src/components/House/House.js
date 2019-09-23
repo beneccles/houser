@@ -1,21 +1,16 @@
 import React, { Component } from 'react'
 import {Link} from 'react-router-dom'
-import axios from 'axios'
+import deleteIcon from '../../assets/deleteIcon.svg'
 
 class House extends Component {
-    constructor(props){
-        super(props)
-
-
-    }
 
     render() {
         const { name, address, city, state,
             zip, img, mortgage, rent, id} = this.props
         return(
             <div className="homeBox">
-                <div className="homeImage">
-                    <img src={img} alt="house" />
+                <div className="homeImage" style={{ backgroundImage: `url('${img}')`}}>
+                    {/* <img className="homeImage" src={img} alt="house" /> */}
                 </div>
                 <div className="homeAddress">
                     <p>{`Property Name: ${name}`}</p>
@@ -24,12 +19,12 @@ class House extends Component {
                     <p>{`State: ${state}`}</p>
                     <p>{`Zip: ${zip}`}</p>
                 </div>
-                <div className="homeRent">
-                    <p>{`Monthly Mortgage: ${mortgage}`}</p>
-                    <p>{`Rent: ${rent}`}</p>
+                <div id="homeRent">
+                    <pre>{`Monthly Mortgage: ${mortgage}`}</pre>
+                    <pre>{`Rent: ${rent}`}</pre>
                 </div>
-                <div className="deleteButton">
-                    <Link to='/'><button onClick={() => this.props.delete(id)}>Delete</button></Link>
+                <div id="deleteButton">
+                    <Link to='/'><img className="deleteIcon" src={deleteIcon} onClick={() => this.props.delete(id)} /></Link>
                 </div>
             </div>
         )

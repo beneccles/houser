@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import axios from 'axios'
 import One from '../Steps/One'
 import Two from '../Steps/Two'
 import Three from '../Steps/Three'

@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
-import store, { HANDLE_STEP1, HANDLE_NAME, HANDLE_ADDRESS, HANDLE_CITY, HANDLE_STATE, HANDLE_ZIP } from '../../store';
-import { Link, withRouter } from "react-router-dom";
+import store, { HANDLE_STEP1 } from '../../store';
 
 class One extends Component {
     constructor() {

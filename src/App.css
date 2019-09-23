@@ -65,8 +65,29 @@ table {
 
 .header {
   width: 100vw;
-  height: 5vh;
+  height: 75px;
   background-color: #519872;
+}
+
+#headerBody {
+  position: absolute;
+  top: 23px;
+  left: 300px;
+  display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: flex-start;
+	align-items: center;
+	align-content: stretch;
+}
+
+#logoText {
+  margin-left: 10px;
+  font-family: 'Open Sans', sans-serif;
+  color: #FFFFFF;
+  font-weight: 700;
+  font-size: 30px;
+  font-style: normal;
 }
 
 /*^Header Section^*/
@@ -84,7 +105,8 @@ table {
 .App {
   background-color: #AFD4C0;
   width: auto;
-  height: auto;
+  height: 4000px;
+  background-size: cover;
   
 }
 
@@ -98,15 +120,19 @@ table {
 }
 
 #dashboardTitle{
-  /* margin-top: 10px;
-  margin-left: 10px; */
+  font-weight: 700;
   font-family: 'Open Sans', sans-serif;
-  font-size: 26px;
+  font-size: 40px;
 }
 
 #newPropertyButton{
-  /* margin-top: 10px;
-  margin-right: 10px; */
+  background-color: #8AEA92;
+  border: none;
+  font-size: 20px;
+  font-weight: 700;
+  padding: 15px;
+  cursor: pointer;
+
 }
 
 .dashHeader {
@@ -140,5 +166,68 @@ table {
  }
 
 /*^Wizard^*/
+
+/* House */
+.homeBox {
+  width: 100%;
+  height: 150px;
+  background-color: #dedede;
+  margin-bottom: 20px;
+  display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: space-between;
+	align-items: center;
+	align-content: stretch;
+}
+
+.homeImage {
+  background-size: 200, 150px;
+  width: 30%;
+  height: 150px;
+}
+
+.homeAddress {
+  margin-left: 20px;
+  width: 30%;
+  height: 150px;
+  display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	justify-content: center;
+	align-items: flex-start;
+  align-content: stretch;
+  line-height: 30px;
+}
+
+#homeRent {
+  display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	justify-content: flex-start;
+	align-items: flex-start;
+  align-content: stretch;
+  line-height: 30px;
+  width: 30%;
+  height: 150px;
+}
+
+#deleteButton {
+  width: 10%;
+  height: 150px;
+  display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	justify-content: flex-start;
+	align-items: flex-end;
+	align-content: stretch;
+}
+
+.deleteIcon{
+  height: 50px;
+  width: 50px;
+}
+/*^House^*/
+
 
 /*^Main Body^*/

@@ -1,0 +1,4 @@
+ALTER TABLE houses
+ADD COLUMN img VARCHAR(255),
+ADD COLUMN rent int,
+ADD COLUMN mortgage int;
