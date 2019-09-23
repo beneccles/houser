@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import {Link} from 'react-router-dom'
+import axios from 'axios'
 
 class House extends Component {
     constructor(props){
@@ -9,7 +11,7 @@ class House extends Component {
 
     render() {
         const { name, address, city, state,
-            zip, img, mortgage, rent } = this.props
+            zip, img, mortgage, rent, id} = this.props
         return(
             <div className="homeBox">
                 <div className="homeImage">
@@ -27,7 +29,7 @@ class House extends Component {
                     <p>{`Rent: ${rent}`}</p>
                 </div>
                 <div className="deleteButton">
-                    <button>Delete</button>
+                    <Link to='/'><button onClick={() => this.props.delete(id)}>Delete</button></Link>
                 </div>
             </div>
         )

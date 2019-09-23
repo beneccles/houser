@@ -1,102 +1,67 @@
 import React, { Component } from 'react'
-import store, { HANDLE_NAME, HANDLE_ADDRESS, HANDLE_CITY, HANDLE_STATE, HANDLE_ZIP } from '../../store';
+import store, { HANDLE_STEP1, HANDLE_NAME, HANDLE_ADDRESS, HANDLE_CITY, HANDLE_STATE, HANDLE_ZIP } from '../../store';
 import { Link, withRouter } from "react-router-dom";
 
 class One extends Component {
     constructor() {
         super()
-        const home = store.getState()
-        this.state ={
+        const reduxState = store.getState()
+        this.state = {
             // If we are coming back from a future step,
             // initialize the input boxes with their original data.
-            name: home.name,
-            address: home.address,
-            city: home.city,
-            state: home.state,
-            zip: home.zipcode
+            name: reduxState.name,
+            address: reduxState.address,
+            city: reduxState.city,
+            state: reduxState.state,
+            zipcode: reduxState.zipcode
         }
     }
 
-    componentDidMount(){
-        this.unsubscribe = store.subscribe(() => {
+    componentDidMount() {
+        store.subscribe(() => {
             const reduxState = store.getState()
             this.setState({
                 name: reduxState.name,
                 address: reduxState.address,
                 city: reduxState.city,
                 state: reduxState.state,
-                zip: reduxState.zipcode
+                zipcode: reduxState.zipcode
             })
-        }).bind(this)
-    }
-
-    componentWillUnmount() {
-        this.unsubscribe();
-    }
-
-    // Handle Name Change
-    handleName = (e) => {
-        store.dispatch({
-            type: HANDLE_NAME,
-            payload: e.target.value
         })
     }
 
-    handleAddress = (e) => {
+    handleStep1 = () => {
         store.dispatch({
-            type: HANDLE_ADDRESS,
-            payload: e.target.value
+            type: HANDLE_STEP1,
+            payload: this.state
         })
     }
 
-    handleCity = (e) => {
-        store.dispatch({
-            type: HANDLE_CITY,
-            payload: e.target.value
-        })
-    }
-
-    handleState = (e) => {
-        store.dispatch({
-            type: HANDLE_STATE,
-            payload: e.target.value
-        })
-    }
-
-    handleZip = (e) => {
-        store.dispatch({
-            type: HANDLE_ZIP,
-            payload: e.target.value
-        })
+    handleInput = (e, fieldName) => {
+        this.setState({ [fieldName]: e.target.value })
     }
 
     render() {
         return (
             <div className="StepOne">
                 <div id="stepOneName">
-                    <input value={this.state.name} type="text" onChange={this.handleName} placeholder="name" />
+                    <input value={this.state.name} type="text" onChange={(e) => this.handleInput(e, 'name')} placeholder="name" />
                 </div>
                 <div id="stepOneAddress">
-                    <input value={this.state.address} type="text" onChange={this.handleAddress} placeholder="address" />
+                    <input value={this.state.address} type="text" onChange={(e) => this.handleInput(e, 'address')} placeholder="address" />
                 </div>
                 <div id="stepOneThree">
-                    <div id="stepOneCity">
-                        <input value={this.state.city} type="text" onChange={this.handleCity} placeholder="city" />
-                    </div>
-                    <div id="stepOneState">
-                        <input value={this.state.state} type="text" onChange={this.handleState} placeholder="state" />
-                    </div>
-                    <div id="stepOneZip">
-                        <input value={this.state.zip} type="number" onChange={this.handleZip} placeholder="zipcode" />
-                    </div>
+                    <input value={this.state.city} type="text" onChange={(e) => this.handleInput(e, 'city')} placeholder="city" />
+                    <input value={this.state.state} type="text" onChange={(e) => this.handleInput(e, 'state')} placeholder="state" />
+                    <input value={this.state.zipcode} type="text" onChange={(e) => this.handleInput(e, 'zipcode')} placeholder="zipcode" />
                 </div>
                 <div className="naviButtons">
-                <button onClick={() => {this.props.history.push('/wizard/two')}}>Next </button>
-                <button onClick={() => {this.props.history.push('/')}}>Cancel </button>
+                    <button onClick={() => {this.handleStep1()
+                        this.props.history.push('/wizard/two') }}>Next </button>
+                    <button onClick={() => { this.props.history.push('/') }}>Cancel </button>
                 </div>
             </div>
         )
     }
 }
-
 export default One

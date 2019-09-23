@@ -12,6 +12,7 @@ const initialState = {
 }
 
 // Trust me, I can handel this.
+export const HANDLE_STEP1 = 'HANDLE_STEP1'
 export const HANDLE_NAME = 'HANDLE_NAME'
 export const HANDLE_ADDRESS = 'HANDLE_ADDRESS'
 export const HANDLE_CITY = 'HANDLE_CITY'
@@ -26,6 +27,8 @@ export const HANDLE_IMAGE = 'HANDLE_IMAGE'
 function reducer(state = initialState, action) {
     const { type, payload } = action
     switch (type) {
+        case HANDLE_STEP1:
+            return {...state, ...payload}
         case HANDLE_NAME:
             return { ...state, name: payload }
         case HANDLE_ADDRESS:

@@ -5,64 +5,38 @@ import axios from 'axios'
 class Three extends Component {
     constructor() {
         super()
-        this._isMounted = false;
-        const home = store.getState();
+        const reduxState = store.getState();
         this.state = {
-            name: home.name,
-            address: home.address,
-            city: home.city,
-            state: home.state,
-            zip: home.zipcode,
-            image: home.image,
-            mortgage: home.mortgage,
-            rent: home.rent
+            mortgage: reduxState.mortgage,
+            rent: reduxState.rent
         }
     }
 
     componentDidMount() {
-        this.unscribe = store.subscribe(() => {
+        store.subscribe(() => {
             const reduxState = store.getState()
             this.setState({
-                name: reduxState.name,
-                address: reduxState.address,
-                city: reduxState.city,
-                state: reduxState.state,
-                zip: reduxState.zipcode,
-                image: reduxState.image,
                 mortgage: reduxState.mortgage,
                 rent: reduxState.rent
             })
-        }).bind(this)
-        console.log(this.state.image)
-    }
-
-    componentWillUnmount() {
-        this.unscribe();
+        })
     }
 
     // DONT FORGET TO CREATE THE ACTION CONSTANTS FOR THESE IN STORE!
-    handleMortgage = (e) => {
-        store.dispatch({
-            type: HANDLE_MORTGAGE,
-            payload: e.target.value
-        })
+    handleInput = (e, fieldName) => {
+        this.setState({ [fieldName]: e.target.value})
     }
-
-    handleRent = (e) => {
-        store.dispatch({
-            type: HANDLE_RENT,
-            payload: e.target.value
-        })
-    }
-
+    
     precisionThanos = () => {
         store.dispatch({
             type: CLEAR_STATE
         })
     }
 
-    submitToDB() {
-        axios.post('/api/house', this.state).then((res) => {
+    submitToDB = () => {
+        const reduxState = store.getState()
+        const newHouse = {...reduxState, ...this.state}
+        axios.post('/api/house', newHouse).then((res) => {
             this.precisionThanos()
             this.props.history.push('/')
         })
@@ -74,11 +48,11 @@ class Three extends Component {
                 <div className="stepThreeInputs">
                     <div className="Mortgage">
                         <h4>Monthly Mortgage Amount</h4>
-                        <input value={this.state.mortgage} type="number" onChange={this.handleImg} placeholder="Mortgage" />
+                        <input value={this.state.mortgage} type="number" onChange={(e) => this.handleInput(e, 'mortgage')} placeholder="Mortgage" />
                     </div>
                     <div className="Rent">
                         <h4>Desired Monthly Rent</h4>
-                        <input value={this.state.rent} type="number" onChange={this.handleImg} placeholder="Rent" />
+                        <input value={this.state.rent} type="number" onChange={(e) => this.handleInput(e, 'rent')} placeholder="Rent" />
                     </div>
                 </div>
                 <div className="stepThreeButtons">
